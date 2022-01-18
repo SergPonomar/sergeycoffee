@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Image from 'next/image';
 
 import { styled, css } from '../stitches.config'
 import { keyframes } from '@stitches/react'
@@ -37,7 +38,7 @@ export default function AddToCart(props) {
         setQuantity(props.checkout.lineItems[index].quantity)
       }
     }
-  }, [props.checkout]);
+  }, [props.checkout, props.product.variants]);
 
   useEffect(() => {
     if (props.product) {
@@ -63,7 +64,7 @@ export default function AddToCart(props) {
       }
     }
     setSimilarProducts(similarProducts.slice(0, 5));
-  }, [props.product]);
+  }, [props.product, props.products]);
 
   const addToCart = (e) => {
     let variant = props.product.variants[0];
@@ -122,7 +123,7 @@ export default function AddToCart(props) {
                           {props.checkoutLoading ?  <SpinnerLarge/> :
                           <><Checkmark /> Добавлено в корзину!</>}
                         </h3>
-                        <img src={props.product.images[0].src}/>
+                        <img src={props.product.images[0].src} alt="Product image"/>
                         <h3>{props.product.title}</h3>  
                         <span>ЦЕНА: {price + ' \u20BD'}</span>
                         <span>

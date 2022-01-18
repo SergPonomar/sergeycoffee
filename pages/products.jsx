@@ -1,6 +1,9 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
+
+import Head from 'next/head';
+import Link from 'next/link';
+import Image from 'next/image';
+
 import { styled } from '../stitches.config'
 
 import FilterPanel from '../components/FilterPanel'
@@ -9,16 +12,6 @@ import ProductItemSkeleton from '../components/ProductItemSkeleton'
 import SortSelect from '../components/SortSelect'
 import { useRouter } from 'next/router'
 
-
-function intersection(setA, setB) {
-    var _intersection = new Set();
-    for (var elem of setB) {
-        if (setA.has(elem)) {
-            _intersection.add(elem);
-        }
-    }
-    return _intersection;
-}
 
 export default function Products(props) {
   const [cartOpen, setCartOpen] = useState(false);
@@ -29,7 +22,7 @@ export default function Products(props) {
 
   useEffect(() => {
     if (!filter) setProducts(JSON.parse(JSON.stringify(props.products)));
-  }, [props.products]);
+  }, [props.products, filter]);
 
   useEffect(() => {
     if (router) {
@@ -42,10 +35,12 @@ export default function Products(props) {
   }, [router])
 
   useEffect(() => {
-    if (!props.productsLoading, !props.collectionsLoading) {
-      filterByCollection(filter);
+    if (!props.productsLoading && !props.collectionsLoading) {
+      setProducts(JSON.parse(JSON.stringify(
+        filterByCollection(filter, props.products, props.collections))));
     };
-  }, [props.productsLoading, props.collectionsLoading, filter])
+  }, [props.productsLoading, props.collectionsLoading, filter, 
+        props.products, props.collections])
     
   const filterHandle = (filters) => {
     let keys = new Set();
@@ -66,37 +61,6 @@ export default function Products(props) {
     setCartOpen(true);
   };
 
-  const filterByCollection = (filters) => {
-    const rightKeys = new Set(['price', 'tag', 'vendor', 'country']);
-    let keys = new Set();
-    filters.forEach(filter => 
-      keys.add(filter.substring(0, filter.indexOf(":")))
-    );
-    keys = intersection(rightKeys, keys);
-
-    const arrByFilterTypes = [...keys].map(key => 
-        filters
-          .filter(f => f.substring(0, f.indexOf(":")) == key)
-          .map(f => f.substring(f.indexOf(":") + 2))
-        );
-
-    /*Filter him-self*/
-    const outSet = new Set();
-    props.products.forEach(item => outSet.add(item.id));
-    arrByFilterTypes.map(type => {
-      let productsByFilterType = new Set();
-      type.map(f => {
-        let collection = props.collections.find((item) => item.handle == f);
-        collection.products.forEach(item => productsByFilterType.add(item.id));
-      })
-      outSet = intersection(outSet, productsByFilterType);
-    });
-
-    let outArr = Array.from(outSet);
-    outArr = outArr.map(id => props.products.find((item) => item.id == id));
-    setProducts(JSON.parse(JSON.stringify(outArr)));
-  };
- 
   const sortProducts = (sorting) => {
     const productsArr = JSON.parse(JSON.stringify(products));
     switch (sorting) {
@@ -175,6 +139,46 @@ export default function Products(props) {
       </ProductGrid>
     </>
   )
+}
+
+const filterByCollection = (filters, products, collections) => {
+  const rightKeys = new Set(['price', 'tag', 'vendor', 'country']);
+  let keys = new Set();
+  filters.forEach(filter => 
+    keys.add(filter.substring(0, filter.indexOf(":")))
+  );
+  keys = intersection(rightKeys, keys);
+
+  const arrByFilterTypes = [...keys].map(key => 
+      filters
+        .filter(f => f.substring(0, f.indexOf(":")) == key)
+        .map(f => f.substring(f.indexOf(":") + 2))
+      );
+
+  //Filter him-self
+  const outSet = new Set();
+  products.forEach(item => outSet.add(item.id));
+  arrByFilterTypes.map(type => {
+    let productsByFilterType = new Set();
+    type.map(f => {
+      let collection = collections.find((item) => item.handle == f);
+      collection.products.forEach(item => productsByFilterType.add(item.id));
+    })
+    outSet = intersection(outSet, productsByFilterType);
+  });
+
+  let outArr = Array.from(outSet);
+  return outArr.map(id => products.find((item) => item.id == id));
+};
+
+function intersection(setA, setB) {
+    var _intersection = new Set();
+    for (var elem of setB) {
+        if (setA.has(elem)) {
+            _intersection.add(elem);
+        }
+    }
+    return _intersection;
 }
 
 const skeletonItems = Array(8).fill(0).map((item, index) => 

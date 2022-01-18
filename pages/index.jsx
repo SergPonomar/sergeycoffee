@@ -1,14 +1,19 @@
-import Head from 'next/head'
-import Link from 'next/link'
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { styled } from '../stitches.config'
-import { keyframes } from '@stitches/react'
+import { styled } from '../stitches.config';
+import { keyframes } from '@stitches/react';
 
-import Button from '../components/Button'
-import ImageGalleryNoThumbs2 from '../components/ImageGalleryNoThumbs2'
-import ProductItem from '../components/ProductItem'
-import ProductItemSkeleton from '../components/ProductItemSkeleton'
+import Button from '../components/Button';
+import ImageGalleryNoThumbs2 from '../components/ImageGalleryNoThumbs2';
+import ProductItem from '../components/ProductItem';
+import ProductItemSkeleton from '../components/ProductItemSkeleton';
 
+import backdrop1 from '../public/backdrop1.jpg';
+import backdrop2 from '../public/backdrop2.jpg';
+import backdrop3 from '../public/backdrop3.jpg';
+import backdrop4 from '../public/backdrop4.jpg';
 
 export default function Home(props) {
 
@@ -35,12 +40,12 @@ export default function Home(props) {
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <MainSection>
-      <img src='backdrop1.jpg'/>
+      <Image src={backdrop1} alt="Backdrop image" priority/>
       <MainTitle>
         <span>Всегда в продаже</span>
         <h1>Свежий Органический<br/>Кофе</h1>
         <h3>Ручной обжарки</h3>
-        <Link href="/products">
+        <Link href="/products" passHref>
           <Button as="a" mode="secondary">СМОТРЕТЬ</Button>
         </Link>
       </MainTitle>
@@ -49,22 +54,22 @@ export default function Home(props) {
     <Banners>
       <Banner>
         <ImgContainer>
-          <img src='backdrop2.jpg'/>
+          <Image src={backdrop2} alt="Backdrop image" priority/>
         </ImgContainer>
         <BannerTitle>
           <span>Кофе Арабика</span>
-          <Link href="/products?tag=арабика">
+          <Link href="/products?tag=арабика" passHref>
             <NavLink>СМОТРЕТЬ</NavLink>
           </Link>
         </BannerTitle>
       </Banner>
       <Banner>
         <ImgContainer>
-          <img src='backdrop3.jpg'/>
+          <Image src={backdrop3} alt="Backdrop image" priority/>
         </ImgContainer>
         <BannerTitle>
           <span>Кофе Робуста</span>
-          <Link href="/products?tag=робуста">
+          <Link href="/products?tag=робуста" passHref>
             <NavLink>СМОТРЕТЬ</NavLink>
           </Link>
         </BannerTitle>
@@ -80,7 +85,7 @@ export default function Home(props) {
       <ImageContainer>
         <div>
           <div>
-            <img src='backdrop4.jpg'/>
+            <Image src={backdrop4} alt="Backdrop image"/>
           </div>
         </div>
         <div></div>
@@ -88,7 +93,7 @@ export default function Home(props) {
       <ClearanceTitle>
         <h1>Элитная арабика из Эфиопии</h1>
         <p>Количество ограничено. Успейте насладиться непревзойденным вкусом.</p>
-        <Link href="/products?country=эфиопия">
+        <Link href="/products?country=эфиопия" passHref>
           <Button as="a" mode="primary">СМОТРЕТЬ</Button>
         </Link>
       </ClearanceTitle>
@@ -353,6 +358,7 @@ const BannerTitle = styled('div', {
 
 const MainSection = styled('div', {
   position: 'relative',
+  overflow: 'hidden',
   '@bp3': {
     height: 700,
   },
@@ -365,16 +371,16 @@ const MainSection = styled('div', {
   '@bp01': {
     height: 450,
   },  
-  '& img': {
-    marginTop: 0,
-    position: 'relative',
-    width: '100%',
-    height: '100%',
+  '& > span:first-child': {
+    marginTop: '0 !important',
+    height: '100% !important',
     zIndex: '-1',
-    objectFit: 'cover',
-    objectPosition: 'right center',
     '@bp2': {
-      marginTop: 50,
+      marginTop: '50px !important',
+    },
+    'img': {
+      objectFit: 'cover',
+      objectPosition: 'right center',
     },
   }
 });

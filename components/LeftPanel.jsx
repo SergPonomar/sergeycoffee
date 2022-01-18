@@ -60,16 +60,16 @@ export default function LeftPanel() {
                     </TabsList>
                   <Tabs.Content value="tab1">
                     <Flex as="nav" direction="column">
-                      <Link href="/products">
+                      <Link href="/products" passHref>
                         <NavLink onClick={closeWithDelay}>Каталог</NavLink>
                       </Link>
-                      <Link href="/products?vendor=alta-roma">
+                      <Link href="/products?vendor=alta-roma" passHref>
                         <NavLink onClick={closeWithDelay}>Alta Roma</NavLink>
                       </Link>
-                      <Link href="/products?vendor=jardin">
+                      <Link href="/products?vendor=jardin" passHref>
                         <NavLink onClick={closeWithDelay}>Jardin</NavLink>
                       </Link>
-                      <Link href="/products?vendor=julius-meinl">
+                      <Link href="/products?vendor=julius-meinl" passHref>
                         <NavLink onClick={closeWithDelay}>Julius Meinl</NavLink>
                       </Link>
                     </Flex>

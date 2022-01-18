@@ -1,8 +1,8 @@
-import {useState} from 'react'
+import {useState} from 'react';
 
-import Link from 'next/link'
+import Link from 'next/link';
 
-import { styled } from '../stitches.config'
+import { styled } from '../stitches.config';
 import * as Dialog from '@radix-ui/react-dialog';
 
 import { useTransition, animated, config } from 'react-spring';
@@ -154,7 +154,7 @@ function CartItem (props) {
         <img src={props.item.variant.image.src}/>
       </div>
       <ItemText>
-        <Link href={`/products/${props.item.variant.product.handle}`}>
+        <Link href={`/products/${props.item.variant.product.handle}`} passHref>
           <ProductName onClick={closeWithDelay}>
             {props.item.title}
           </ProductName>

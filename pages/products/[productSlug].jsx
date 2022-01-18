@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -15,6 +16,10 @@ import * as Tabs from '@radix-ui/react-tabs';
 import Button from '/components/Button';
 import ImageGallery from '/components/ImageGallery';
 import ImageGalleryNoThumbs2 from '/components/ImageGalleryNoThumbs2';
+
+import backdrop6 from '/public/backdrop6.jpg';
+import backdrop7 from '/public/backdrop7.jpg';
+import backdrop8 from '/public/backdrop8.jpg';
 
 
 export default function Product(props) {
@@ -135,19 +140,19 @@ export default function Product(props) {
       <TabsContent value="description">
         <Overview1>
           <div>
-            <img src="/backdrop6.jpg"/>
+            <Image src={backdrop6} alt="Backdrop image"/>
           </div>
           <div>
             <h2>Кофе с обволакивающим вкусом, которым можно наслаждаться в любое время дня</h2>
             <p>Для истинных ценителей кофе изысканный сорт собранных вручную органических зерен</p>
-            <img src="/backdrop7.jpg"/>
+            <Image src={backdrop7} alt="Backdrop image"/>
           </div>
         </Overview1>
         <Overview2>
           <h4>ПОЛНОЕ ОПИСАНИЕ</h4>
           <SeparatorVert/>
           {!props.productsLoading ? <p>{product.description}</p> : <Skeleton/>}
-          <img src="/backdrop8.jpg"/>
+          <Image src={backdrop8} alt="Backdrop image"/>
         </Overview2>
       </TabsContent>
       <TabsContent value="additional">
@@ -186,7 +191,7 @@ export default function Product(props) {
               </div>
             </AdditionalText>
           </div>
-          <img src="/coffee.jpg"/>
+            <img src="/coffee.jpg"/>
         </Additional>
       </TabsContent>
       <TabsContent value="reviews">

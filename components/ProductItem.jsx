@@ -36,7 +36,7 @@ function ProductItem (props) {
                   </IconsMenu>
                 </div>
               </ProductImage>
-                <Link href={`/products/${props.product.handle}`}>
+                <Link href={`/products/${props.product.handle}`} passHref>
                   <ProductName>
                     {props.product.title}
                   </ProductName>

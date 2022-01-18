@@ -21,16 +21,16 @@ export default function Header(props) {
         </a>
       </Link>
       <Links as="nav" css={{ gap: '$6'}}>
-        <Link href="/products">
+        <Link href="/products" passHref>
           <NavLink>Каталог</NavLink>
         </Link>
-        <Link href="/products?vendor=alta-roma">
+        <Link href="/products?vendor=alta-roma" passHref>
           <NavLink>Alta Roma</NavLink>
         </Link>
-        <Link href="/products?vendor=jardin">
+        <Link href="/products?vendor=jardin" passHref>
           <NavLink>Jardin</NavLink>
         </Link>
-        <Link href="/products?vendor=julius-meinl">
+        <Link href="/products?vendor=julius-meinl" passHref>
           <NavLink>Julius Meinl</NavLink>
         </Link>
       </Links>
