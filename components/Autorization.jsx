@@ -47,9 +47,11 @@ export default function Autorization() {
                     </CloseButton>
                   </Dialog.Close>
 
-                  <img style={{
-                    width:'178px'
-                  }} src='logo.png'/>
+                  <img 
+                    style={{width:'178px'}} 
+                    src='logo.png'
+                    alt="Company logo"
+                  />
                   <Separator />
                   <h3>Great to have you back!</h3>
                   <Form>

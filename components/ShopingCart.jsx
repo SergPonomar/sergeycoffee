@@ -151,7 +151,10 @@ function CartItem (props) {
   return (
     <CartItemStyled>
       <div>
-        <img src={props.item.variant.image.src}/>
+        <img 
+          src={props.item.variant.image.src}
+          alt={props.item.title}
+        />
       </div>
       <ItemText>
         <Link href={`/products/${props.item.variant.product.handle}`} passHref>

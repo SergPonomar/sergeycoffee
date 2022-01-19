@@ -191,7 +191,7 @@ export default function Product(props) {
               </div>
             </AdditionalText>
           </div>
-            <img src="/coffee.jpg"/>
+            <img src="/coffee.jpg" alt="Coffee pack"/>
         </Additional>
       </TabsContent>
       <TabsContent value="reviews">

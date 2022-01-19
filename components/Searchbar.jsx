@@ -26,7 +26,10 @@ export default function Searchbar(props) {
   const gridItems = results.map((product) =>
     <CartItem key={product.id}>
       <div>
-        <img src={product.images[0].src}/>
+        <img 
+          src={product.images[0].src}
+          alt={product.title}
+        />
       </div>
       <ItemText>
         <Link href={`/products/${product.handle}`}>

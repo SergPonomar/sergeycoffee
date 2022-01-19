@@ -13,7 +13,10 @@ export default function ImageGalleryNoThumbs(props) {
       id: product.variants[0].id,
       renderItem: (
         <Item>
-          <img src={product.images[0].src} />
+          <img
+            src={product.images[0].src}
+            alt={product.title}
+          />
           <h3>{product.title}</h3>
           <span>{product.variants[0].price.slice(0,-3) + ' \u20BD'}</span>
         </Item>

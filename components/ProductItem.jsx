@@ -15,7 +15,10 @@ function ProductItem (props) {
           {!imgLoading ?
             <ProductCard>
               <ProductImage>
-                <img src={props.product.images[0].src}/>
+                <img 
+                  src={props.product.images[0].src}
+                  alt={props.product.title}
+                />
                 <div>
                   <IconsMenu>
                     <Quickview 

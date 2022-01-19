@@ -5,6 +5,7 @@ import ContentLoader from "react-content-loader"
 
 
 export default function ImageGallery(props) {
+  console.log(props.product)
   const items = Array(!props.productsLoading ? props.product.images.length : 4)
           .fill(0)
           .map((p, index) => ({
@@ -12,13 +13,23 @@ export default function ImageGallery(props) {
               renderItem: (
                   <Item>
                     {!props.productsLoading ?
-                    <img src={props.product.images[index].src} /> : <Skeleton/>}
+                      <img 
+                        src={props.product.images[index].src} 
+                        alt={`Product picture ${index + 1}`}
+                      /> : 
+                      <Skeleton/>
+                    }
                   </Item>
                 ),
                 renderThumb: (
                   <Thumb onClick={() => slideToItem(`item-${index}`)}>
                     {!props.productsLoading ?
-                    <img src={props.product.images[index].src} /> : <Skeleton/>}
+                      <img 
+                        src={props.product.images[index].src}
+                        alt={`Product picture ${index + 1}`}
+                      /> : 
+                      <Skeleton/>
+                    }
                   </Thumb>
                 ),
               })
@@ -76,7 +87,7 @@ const Item = styled('div', {
 
 const Thumb = styled('div', {
   width: 100,
-  aspectRatio: '0.816',
+  aspectRatio: '1 / 1',
   cursor: 'pointer',
   display: 'flex',
   justifyContent: 'center',
@@ -87,7 +98,7 @@ const Thumb = styled('div', {
     height: '100%',
   },
   '& svg': {
-    aspectRatio: '0.816',
+    aspectRatio: '1 / 1',
   },
   '@bp2': {
     width: 90,
